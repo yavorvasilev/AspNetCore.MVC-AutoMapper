@@ -8,6 +8,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Data;
     using Data.Models;
+    using Infrastructure.Extensions;
 
     public class Startup
     {
@@ -32,6 +33,8 @@
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseDatabaseMigration();
+
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
