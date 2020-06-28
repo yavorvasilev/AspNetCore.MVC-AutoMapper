@@ -47,14 +47,14 @@
 
                         var adminEmail = "admin@mysite.com";
 
-                        var adminUser = await userManger.FindByNameAsync(adminEmail);
+                        var adminUser = await userManger.FindByEmailAsync(adminEmail);
 
                         if (adminUser is null)
                         {
                             adminUser = new User
                             {
                                 Email = adminEmail,
-                                UserName = adminEmail,
+                                UserName = adminName,
                                 Name = adminName,
                                 Birthdate = DateTime.UtcNow
                             };
