@@ -1,5 +1,6 @@
 ﻿namespace LearningSystem.Web
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,8 @@
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<LearningSystemDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAutoMapper(typeof(Startup));
 
             services.AddMvc();
         }
