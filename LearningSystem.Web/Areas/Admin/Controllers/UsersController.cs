@@ -39,7 +39,7 @@
                 })
                 .ToListAsync();
 
-            return View(new AdminUserListingsViewModel 
+            return View(new UserListingsViewModel 
             {
                 Users = users,
                 Roles = roles

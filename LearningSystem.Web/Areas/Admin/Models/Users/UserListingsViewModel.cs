@@ -4,7 +4,7 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
     using System.Collections.Generic;
 
-    public class AdminUserListingsViewModel
+    public class UserListingsViewModel
     {
         public IEnumerable<AdminUserListingServiceModel> Users { get; set; }
 
