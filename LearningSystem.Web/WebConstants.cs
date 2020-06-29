@@ -5,5 +5,10 @@
         public const string TrainerRole = "Trainer";
         public const string BlogAuthorRole = "BlogAuthor";
         public const string AdministratorRole = "Administrator";
+
+        public const string TempDataSuccessMessageKey = "SuccessMessage";
+        public const string TempDataErroMessageKey = "ErrorMessage";
+
+        public const string AdminArea = "Admin";
     }
 }

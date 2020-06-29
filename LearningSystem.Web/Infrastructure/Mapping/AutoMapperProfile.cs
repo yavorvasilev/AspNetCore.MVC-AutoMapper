@@ -1,10 +1,9 @@
 ﻿namespace LearningSystem.Web.Infrastructure.Mapping
 {
     using AutoMapper;
+    using Common.Mapping;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     public class AutoMapperProfile : Profile
     {

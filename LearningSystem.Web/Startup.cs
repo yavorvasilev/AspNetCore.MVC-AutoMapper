@@ -10,6 +10,7 @@
     using Data;
     using Data.Models;
     using Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Mvc;
 
     public class Startup
     {
@@ -35,11 +36,14 @@
                 .AddEntityFrameworkStores<LearningSystemDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper();
 
             services.AddDomainServices();
 
-            services.AddMvc();
+            services.AddMvc(options => 
+            {
+                options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
