@@ -26,6 +26,14 @@
     margin: 15px;
 }
 
+.article-list li {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.pagination li.disabled {
+    pointer-events: none;
+}
+
 /* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
     /* Hide captions */

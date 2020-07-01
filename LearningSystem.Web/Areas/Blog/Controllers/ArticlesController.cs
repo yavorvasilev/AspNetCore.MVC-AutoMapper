@@ -31,7 +31,13 @@
         }
 
         [AllowAnonymous]
-        public IActionResult Index() => View();
+        public async Task<IActionResult> Index(int page = 1)
+            => View(new ArticleListingViewModel 
+            {
+                Articles = await articles.AllAsync(page),
+                TotalArticles = await articles.TotalAsync(),
+                 CurrentPage = page
+            });
 
         public IActionResult Create() => View();
 

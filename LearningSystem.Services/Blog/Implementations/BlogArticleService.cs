@@ -1,9 +1,16 @@
 ﻿namespace LearningSystem.Services.Blog.Implementations
 {
-    using LearningSystem.Data;
-    using LearningSystem.Data.Models;
+    using AutoMapper.QueryableExtensions;
+    using Data;
+    using Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using Services.Blog.Models;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+
+    using static ServiceConstants;
 
     public class BlogArticleService : IBlogArticleService
     {
@@ -13,6 +20,15 @@
         {
             this.db = db;
         }
+
+        public async Task<IEnumerable<BlogArticleListingServiceModel>> AllAsync(int page = 1)
+            => await db
+            .Articles
+            .OrderByDescending(a => a.PublishDate)
+            .Skip((page - 1) * BlogArticlesPageSize)
+            .Take(BlogArticlesPageSize)
+            .ProjectTo<BlogArticleListingServiceModel>()
+            .ToListAsync();
 
         public async Task CreateAsync(
             string title, 
@@ -31,5 +47,8 @@
 
             await db.SaveChangesAsync();
         }
+
+        public async Task<int> TotalAsync()
+            => await db.Articles.CountAsync();
     }
 }
