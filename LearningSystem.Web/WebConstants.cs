@@ -10,5 +10,6 @@
         public const string TempDataErroMessageKey = "ErrorMessage";
 
         public const string AdminArea = "Admin";
+        public const string BlogArea = "Blog";
     }
 }
