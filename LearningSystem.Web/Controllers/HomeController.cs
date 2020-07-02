@@ -1,37 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using LearningSystem.Web.Models;
-
-namespace LearningSystem.Web.Controllers
+﻿namespace LearningSystem.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using System.Diagnostics;
+    using Services;
+    using Microsoft.AspNetCore.Mvc;
+    using Web.Models;
+
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly ICourseService courses;
+
+        public HomeController(ICourseService courses)
         {
-            return View();
+            this.courses = courses;
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
+        public async Task<IActionResult> Index()
+            => View(await courses.Active());
 
         public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            => View(new ErrorViewModel 
+            { 
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier 
+            });
     }
 }
