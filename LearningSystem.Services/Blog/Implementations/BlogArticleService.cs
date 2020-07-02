@@ -3,8 +3,8 @@
     using AutoMapper.QueryableExtensions;
     using Data;
     using Data.Models;
+    using LearningSystem.Services.Blog.Models;
     using Microsoft.EntityFrameworkCore;
-    using Services.Blog.Models;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -29,6 +29,13 @@
             .Take(BlogArticlesPageSize)
             .ProjectTo<BlogArticleListingServiceModel>()
             .ToListAsync();
+
+        public async Task<BlogArticleDetailsServiceModel> ById(int id)
+            => await db
+            .Articles
+            .Where(a => a.Id == id)
+            .ProjectTo<BlogArticleDetailsServiceModel>()
+            .FirstOrDefaultAsync();
 
         public async Task CreateAsync(
             string title, 

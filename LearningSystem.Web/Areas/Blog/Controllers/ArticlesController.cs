@@ -2,9 +2,10 @@
 {
     using Areas.Blog.Models.Articles;
     using Infrastructure.Filters;
-    using LearningSystem.Data.Models;
-    using LearningSystem.Services.Blog;
-    using LearningSystem.Services.Html;
+    using Data.Models;
+    using Services.Blog;
+    using Services.Html;
+    using Web.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -21,8 +22,8 @@
         private readonly UserManager<User> userManager;
 
         public ArticlesController(
-            IHtmlService html, 
-            IBlogArticleService articles, 
+            IHtmlService html,
+            IBlogArticleService articles,
             UserManager<User> userManager)
         {
             this.html = html;
@@ -32,18 +33,22 @@
 
         [AllowAnonymous]
         public async Task<IActionResult> Index(int page = 1)
-            => View(new ArticleListingViewModel 
+            => View(new ArticleListingViewModel
             {
                 Articles = await articles.AllAsync(page),
                 TotalArticles = await articles.TotalAsync(),
-                 CurrentPage = page
+                CurrentPage = page
             });
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
+            => this.ViewOrNotFound(await articles.ById(id));
 
         public IActionResult Create() => View();
 
         [HttpPost]
         [ValidateModelState]
-        public async Task<IActionResult> Create(PublishArticleFormModel model) 
+        public async Task<IActionResult> Create(PublishArticleFormModel model)
         {
             model.Content = html.Sanitize(model.Content);
 

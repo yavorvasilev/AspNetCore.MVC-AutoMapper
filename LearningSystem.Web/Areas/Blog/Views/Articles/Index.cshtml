@@ -12,7 +12,7 @@
             @foreach (var article in Model.Articles)
             {
                 <li class="list-group-item">
-                    <a asp-action="Details" asp-rout-id="@article.Id">@article.Title</a>
+                    <a asp-area="Blog" asp-controller="Articles" asp-action="Details" asp-route-id="@article.Id" asp-route-title="@article.Title.ToFriendlyUrl()">@article.Title</a>
                     <br />
                     <small>published by @article.Author on @article.PublishDate.ToShortDateString() </small>
                 </li>
