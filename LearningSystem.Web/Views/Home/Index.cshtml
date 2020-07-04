@@ -15,12 +15,14 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">@course.Name</h3>
+                    <h3 class="panel-title">
+                        <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">@course.Name</a>
+                    </h3>
                 </div>
                 <div class="panel-body">
-                    <img src="https://picsum.photos/200/200?guid=@(Guid.NewGuid())" class="img-responsive"/>
+                    <img src="https://picsum.photos/200/200?guid=@(Guid.NewGuid())" class="img-responsive" />
                     <br />
-                   @course.StartDate.ToShortDateString() - @course.EndDate.ToShortDateString()
+                    @course.StartDate.ToShortDateString() - @course.EndDate.ToShortDateString()
                 </div>
             </div>
         </div>
