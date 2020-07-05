@@ -2,12 +2,13 @@
 {
     using Data.Models;
     using Models.Courses;
+    using Infrastructure.Extensions;
+    using Services.Models;
     using Services;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Authorization;
-    using LearningSystem.Web.Infrastructure.Extensions;
 
     public class CoursesController : Controller
     {
@@ -26,7 +27,7 @@
         {
             var model = new CourseDetailsViewModel
             {
-                Course = await courses.ByIdAsync(id)
+                Course = await courses.ByIdAsync<CourseDetailsServiceModel>(id)
             };
 
             if (model.Course is null)
