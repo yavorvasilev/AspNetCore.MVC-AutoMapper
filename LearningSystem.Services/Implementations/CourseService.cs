@@ -34,6 +34,18 @@
             .ProjectTo<TModel>()
             .FirstOrDefaultAsync();
 
+        public async Task<IEnumerable<CourseListingServiceModel>> FindAsync(string searchText)
+        {
+            searchText = searchText ?? string.Empty;
+
+            return await db
+            .Courses
+            .OrderByDescending(c => c.Id)
+            .Where(c => c.Name.ToLower().Contains(searchText.ToLower()))
+            .ProjectTo<CourseListingServiceModel>()
+            .ToListAsync();
+        }
+
         public async Task<bool> SignOutStudentAsync(int courseId, string studentId)
         {
             var courseInfo = await GetCourseInfo(courseId, studentId);

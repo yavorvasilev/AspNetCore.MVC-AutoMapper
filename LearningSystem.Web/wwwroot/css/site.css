@@ -38,6 +38,10 @@
     margin-top: 50px
 }
 
+#arsh {
+    white-space: pre-wrap;
+}
+
 /*.home-page .img-responsive {
     height: 200px !important;
 }*/
